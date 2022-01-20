@@ -6,6 +6,7 @@ import { ControlComponent } from './control/control.component';
 import { OddComponent } from './odd/odd.component';
 import { EvenComponent } from './even/even.component';
 import { FormsModule } from '@angular/forms';
+import { GeneratorService } from './generator.service';
 
 @NgModule({
   declarations: [AppComponent, ControlComponent, OddComponent, EvenComponent],

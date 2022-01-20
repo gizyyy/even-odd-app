@@ -1,20 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { GeneratorService } from './generator.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'even-odd-app';
-  @Input() oddNumbers: Array<number> = [];
-  @Input() evenNumbers: Array<number> = [];
+  oddNumbers: Array<number> = [];
+  evenNumbers: Array<number> = [];
 
-  putNumberToList(coming: number) {
-    if (coming % 2 === 0) {
-      this.evenNumbers.push(coming);
-      return;
-    }
-    this.oddNumbers.push(coming);
+  constructor(private generatorService: GeneratorService) {}
+
+  ngOnInit(): void {
+    this.generatorService.generatedNumber.subscribe((coming: number) => {
+      if (coming % 2 === 0) {
+        this.evenNumbers.push(coming);
+        return;
+      }
+      this.oddNumbers.push(coming);
+    });
   }
 }

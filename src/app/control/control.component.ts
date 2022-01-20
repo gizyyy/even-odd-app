@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { interval } from 'rxjs';
+import { GeneratorService } from '../generator.service';
 
 @Component({
   selector: 'app-control',
@@ -7,21 +8,14 @@ import { interval } from 'rxjs';
   styleUrls: ['./control.component.css'],
 })
 export class ControlComponent implements OnInit {
-  @Output() intervalFired = new EventEmitter<number>();
-  intervalNumber = 0;
-  interval: any;
-
-  constructor() {}
+  constructor(private generatedService: GeneratorService) {}
 
   onStartGame(): void {
-    this.interval = setInterval(() => {
-      this.intervalFired.emit(this.intervalNumber + 1);
-      this.intervalNumber++;
-    }, 1000);
+    this.generatedService.startToGenerate();
   }
 
   onStopGame(): void {
-    clearInterval(this.interval);
+    this.generatedService.pauseGame();
   }
 
   ngOnInit(): void {}
